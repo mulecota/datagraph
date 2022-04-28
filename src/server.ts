@@ -6,8 +6,7 @@ import routes from "./routes";
 import logger from "./logger";
 import cors from 'cors';
 
-const port = config.get("port") as number || 8080;
-const host = config.get("host") as string || "localhost";
+const port = config.get("port") as number;
 
 const app = express();
 
@@ -19,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 //     origin: 'http://localhost:3000'
 // }))
 
-app.listen(port, host, () => {
-    logger.info(`Server listing at http://${host}:${port}`);
+app.listen(port, () => {
+    logger.info(`Server listing on port ${port}`);
     routes(app);
 });

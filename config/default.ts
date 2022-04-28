@@ -2,7 +2,8 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+const PORT = process.env.PORT || 3001;
+
 export default {
-    port: process.env.NODE_PORT,
-    host: process.env.NODE_HOST,
-  }
+    port: PORT
+}
