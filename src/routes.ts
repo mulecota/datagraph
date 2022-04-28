@@ -25,9 +25,8 @@ export default function (app: Express) {
 
     // List all the customers
     app.get("/api/banking/customers", (req: Request, res: Response) => {
-        res.status(200).send({
-            customers: customers,
-        });
+        const customersArray = customers.filter(customer => customer.customerid);
+        return res.status(200).send(customersArray);
     });
 
     // Get a customer using customerid
@@ -47,18 +46,7 @@ export default function (app: Express) {
         "/api/banking/customers/:customerid/accounts",
         (req: Request, res: Response) => {
             const customerid = req.params.customerid;
-
             const customerAccounts = accounts.filter(account => account.customerid == customerid);
-
-            // let customerAccounts = [];
-            // accounts.map((account) => {
-            //     if (account.customerid == customerid) {
-            //         console.log(account);
-            //         customerAccounts.push(account);
-            //     }
-            //     return res.status(200).send(customerAccounts);
-            //
-            // });
             return res.status(200).send(customerAccounts);
 
         }
@@ -78,9 +66,8 @@ export default function (app: Express) {
 
     // List all the accounts
     app.get("/api/banking/accounts", (req: Request, res: Response) => {
-        res.status(200).send({
-            accounts: accounts,
-        });
+        const accountsArray = accounts.filter(account => account.customerid);
+        return res.status(200).send(accountsArray);
     });
 
 
@@ -88,13 +75,6 @@ export default function (app: Express) {
     app.get("/api/banking/accounts/:accountid", (req: Request, res: Response) => {
         const accountid = req.params.accountid;
         const account = accounts.filter(item => item.id === accountid);
-        // accounts.map((accounts) => {
-        //     if (accounts.id == accountid) {
-        //         return res.status(200).send({
-        //             accounts,
-        //         });
-        //     }
-        // });
         return res.status(200).send(account);
     });
 
@@ -108,6 +88,6 @@ export default function (app: Express) {
             });
         });
 
-    // eCommerce endpoints
+    // eCommerce endpoints - TO-DO
 
 }
