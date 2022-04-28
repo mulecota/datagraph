@@ -1,8 +1,8 @@
 {
-  "name": "datagraph",
+  "name": "datagraph-demo",
   "version": "1.0.0",
   "description": "Anypoint DataGraph demo assets and backend APIs",
-  "main": "server.js",
+  "main": "src/server.ts",
   "scripts": {
     "build": "rm -rf build/ && prettier --write src/ && tsc",
     "start": "node build/src/server.js",
