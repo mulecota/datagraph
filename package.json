@@ -4,7 +4,6 @@
   "description": "Anypoint DataGraph demo assets and backend APIs",
   "main": "src/server.ts",
   "scripts": {
-    "build": "rm -rf build/ && prettier --write src/ && tsc",
     "start": "node build/src/server.js",
     "dev": "nodemon --config nodemon.json src/server.ts || npx pino-pretty",
     "postinstall": "tsc"
