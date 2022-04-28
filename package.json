@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "build": "rm -rf build/ && prettier --write src/ && tsc",
-    "dev": "nodemon --config nodemon.json src/server.ts || npx pino-pretty"
+    "start": "node build/src/server.js",
+    "dev": "nodemon --config nodemon.json src/server.ts || npx pino-pretty",
+    "postinstall": "tsc"
   },
   "keywords": [],
   "author": "Alan Cota",
