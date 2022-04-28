@@ -25,23 +25,23 @@ export default function (app: Express) {
 
     // List all the customers
     app.get("/api/banking/customers", (req: Request, res: Response) => {
-        const customersArray = customers.filter(customer => customer.customerid);
+        const customersArray = customers.filter(customer => customer.customerId);
         return res.status(200).send(customersArray);
     });
 
-    // Get a customer using customerid
-    app.get("/api/banking/customers/:customerid", (req: Request, res: Response) => {
-        const customerid = req.params.customerid;
-        const customersArray = customers.filter(customer => customer.customerid == customerid);
+    // Get a customer using customerId
+    app.get("/api/banking/customers/:customerId", (req: Request, res: Response) => {
+        const customerId = req.params.customerId;
+        const customersArray = customers.filter(customer => customer.customerId == customerId);
         return res.status(200).send(customersArray);
     });
 
-    // Get all accounts of a customer using customerid
+    // Get all accounts of a customer using customerId
     app.get(
-        "/api/banking/customers/:customerid/accounts",
+        "/api/banking/customers/:customerId/accounts",
         (req: Request, res: Response) => {
-            const customerid = req.params.customerid;
-            const customerAccounts = accounts.filter(account => account.customerid == customerid);
+            const customerId = req.params.customerId;
+            const customerAccounts = accounts.filter(account => account.customerId == customerId);
             return res.status(200).send(customerAccounts);
 
         }
@@ -61,7 +61,7 @@ export default function (app: Express) {
 
     // List all the accounts
     app.get("/api/banking/accounts", (req: Request, res: Response) => {
-        const accountsArray = accounts.filter(account => account.customerid);
+        const accountsArray = accounts.filter(account => account.customerId);
         return res.status(200).send(accountsArray);
     });
 
@@ -69,7 +69,7 @@ export default function (app: Express) {
     // List a specific account using the accountId
     app.get("/api/banking/accounts/:accountid", (req: Request, res: Response) => {
         const accountid = req.params.accountid;
-        const account = accounts.filter(item => item.id === accountid);
+        const account = accounts.filter(item => item.accountId === accountid);
         return res.status(200).send(account);
     });
 
