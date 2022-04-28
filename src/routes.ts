@@ -21,17 +21,12 @@ export default function (app: Express) {
 
     // Banking endpoints
 
+    // Customers
+
     // List all the customers
     app.get("/api/banking/customers", (req: Request, res: Response) => {
         res.status(200).send({
             customers: customers,
-        });
-    });
-
-    // List all the accounts
-    app.get("/api/banking/accounts", (req: Request, res: Response) => {
-        res.status(200).send({
-            accounts: accounts,
         });
     });
 
@@ -52,13 +47,20 @@ export default function (app: Express) {
         "/api/banking/customers/:customerid/accounts",
         (req: Request, res: Response) => {
             const customerid = req.params.customerid;
-            accounts.map((accounts) => {
-                if (accounts.customerid == customerid) {
-                    return res.status(200).send({
-                        accounts,
-                    });
-                }
-            });
+
+            const customerAccounts = accounts.filter(account => account.customerid == customerid);
+
+            // let customerAccounts = [];
+            // accounts.map((account) => {
+            //     if (account.customerid == customerid) {
+            //         console.log(account);
+            //         customerAccounts.push(account);
+            //     }
+            //     return res.status(200).send(customerAccounts);
+            //
+            // });
+            return res.status(200).send(customerAccounts);
+
         }
     );
 
@@ -66,19 +68,43 @@ export default function (app: Express) {
 
     app.post('/api/banking/customers',
         (req, res) => {
-        customers.push(req.body);
-        res.status(201).send({
-            customers,
+            customers.push(req.body);
+            res.status(201).send({
+                customers,
+            });
         });
+
+    // Accounts
+
+    // List all the accounts
+    app.get("/api/banking/accounts", (req: Request, res: Response) => {
+        res.status(200).send({
+            accounts: accounts,
+        });
+    });
+
+
+    // List a specific account using the accountId
+    app.get("/api/banking/accounts/:accountid", (req: Request, res: Response) => {
+        const accountid = req.params.accountid;
+        const account = accounts.filter(item => item.id === accountid);
+        // accounts.map((accounts) => {
+        //     if (accounts.id == accountid) {
+        //         return res.status(200).send({
+        //             accounts,
+        //         });
+        //     }
+        // });
+        return res.status(200).send(account);
     });
 
     // Add new account (in memory)
 
     app.post('/api/banking/accounts',
-        (req, res) => {
+        (req: Request, res: Response) => {
             accounts.push(req.body);
             res.status(201).send({
-                customers,
+                accounts,
             });
         });
 
