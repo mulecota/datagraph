@@ -32,13 +32,8 @@ export default function (app: Express) {
     // Get a customer using customerid
     app.get("/api/banking/customers/:customerid", (req: Request, res: Response) => {
         const customerid = req.params.customerid;
-        customers.map((customers) => {
-            if (customers.customerid == customerid) {
-                return res.status(200).send({
-                    customers,
-                });
-            }
-        });
+        const customersArray = customers.filter(customer => customer.customerid == customerid);
+        return res.status(200).send(customersArray);
     });
 
     // Get all accounts of a customer using customerid
